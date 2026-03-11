@@ -1,11 +1,12 @@
 # PalindromeCheckerApp
-Use Case 5: Stack-Based Reversal Logic
-This stage introduces the first complex data structure—the Stack. It demonstrates how structural properties (LIFO) can simplify algorithmic logic.
+Use Case 6: FIFO vs LIFO Behavioral Comparison
+This stage serves as a comparative study of two fundamental linear data structures: the Stack and the Queue. By utilizing their inherent ordering properties, we can validate palindromes through structural behavior.
 
 The application now:
 
-- Pushes: Iterates through the string and pushes each character onto the top of the stack.
+- Stacks (LIFO): Pushes characters to create a reversed sequence upon popping.
 
-- Pops: Removes characters from the stack. Because the last character pushed is the first one popped, the string is naturally reversed.
+- Queues (FIFO): Enqueues characters to maintain the original sequence upon dequeuing.
 
-- Validates: Compares the reconstructed string against the original input.
+- Compares: Simultaneously removes elements from both. If the "First-In" (Queue) always matches the "Last-In" (Stack), the word is symmetrical.
+ 

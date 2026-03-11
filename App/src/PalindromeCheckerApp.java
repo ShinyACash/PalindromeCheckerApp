@@ -35,17 +35,28 @@ public class PalindromeCheckerApp{
         System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.1.0");
         System.out.println("System Initialized successfully\n---");
 
-        // UC2: Palindrome Logic
-        String original = "madam";
+        // UC3: Manual Logic
+        String original = "racecar"; // Hardcoded for now
+        String reversed = "";
 
-        String reversed = new StringBuilder(original).reverse().toString();
+        System.out.println("Target String: " + original);
 
-        System.out.println("Checking string: " + original);
+        /*
+         * Loop Logic:
+         * Start from the last index (length - 1) and move to 0.
+         * We concatenate each character to our 'reversed' string.
+         */
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed += original.charAt(i);
+        }
 
-        if (original.equalsIgnoreCase(reversed)) {
-            System.out.println("Result: The string is a Palindrome.");
+        System.out.println("Reversed String: " + reversed);
+
+        // UC3: content-based comparison using .equals()
+        if (original.equals(reversed)) {
+            System.out.println("Result: Success! It is a Palindrome.");
         } else {
-            System.out.println("Result: The string is NOT a Palindrome.");
+            System.out.println("Result: Failed. Not a Palindrome.");
         }
     }
 }

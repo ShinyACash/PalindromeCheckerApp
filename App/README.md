@@ -1,11 +1,11 @@
 # PalindromeCheckerApp
-Use Case 2: Hardcoded Palindrome Check
-At this stage, the application moves beyond a simple startup and implements its first bit of core logic. The program now verifies if a predefined string is a palindrome.
+Use Case 5: Stack-Based Reversal Logic
+This stage introduces the first complex data structure—the Stack. It demonstrates how structural properties (LIFO) can simplify algorithmic logic.
 
 The application now:
 
-- Converts Data: Transforms the String into a char[] (primitive character array).
+- Pushes: Iterates through the string and pushes each character onto the top of the stack.
 
-- Two-Pointer Logic: Uses two integer variables (left and right) to track positions from both ends of the array simultaneously.
+- Pops: Removes characters from the stack. Because the last character pushed is the first one popped, the string is naturally reversed.
 
-- Early Exit: The loop terminates immediately if a mismatch is detected, saving CPU cycles.
+- Validates: Compares the reconstructed string against the original input.

@@ -31,7 +31,22 @@ public class PalindromeCheckerApp{
      */
 
     public static void main(String[] args){
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.0.0\nSystem Initialized successfully");
+        // UC1: Welcome Message
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.1.0");
+        System.out.println("System Initialized successfully\n---");
+
+        // UC2: Palindrome Logic
+        String original = "madam";
+
+        String reversed = new StringBuilder(original).reverse().toString();
+
+        System.out.println("Checking string: " + original);
+
+        if (original.equalsIgnoreCase(reversed)) {
+            System.out.println("Result: The string is a Palindrome.");
+        } else {
+            System.out.println("Result: The string is NOT a Palindrome.");
+        }
     }
 }
 

@@ -1,35 +1,36 @@
 /*
  * ==========================================
- * SERVICE CLASS - PalindromeService.java
+ * INTERFACE - PalindromeStrategy.java
  * ==========================================
- * * This class encapsulates the logic for palindrome validation.
- * It follows the Single Responsibility Principle (SRP).
+ * Defines the contract for all palindrome algorithms.
  */
-class PalindromeService {
+interface PalindromeStrategy {
+    boolean isValid(String input);
+}
 
-    /**
-     * Encapsulated logic to check if a string is a palindrome.
-     * Uses UC10 normalization and UC4 two-pointer efficiency.
-     * * @param input The raw string to check
-     * @return boolean true if palindrome, false otherwise
-     */
-    public boolean isPalindrome(String input) {
-        if (input == null) return false;
-
-        // Step 1: Normalize (Encapsulated Pre-processing)
+/* * Concrete Strategy 1: Stack-based (LIFO)
+ */
+class StackStrategy implements PalindromeStrategy {
+    public boolean isValid(String input) {
+        java.util.Stack<Character> stack = new java.util.Stack<>();
         String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        for (char c : clean.toCharArray()) stack.push(c);
 
-        // Step 2: Validate (Internal Logic)
-        return checkLogic(clean);
+        StringBuilder reversed = new StringBuilder();
+        while (!stack.isEmpty()) reversed.append(stack.pop());
+
+        return clean.equals(reversed.toString());
     }
+}
 
-    // Private helper method - Internal implementation detail
-    private boolean checkLogic(String s) {
-        int left = 0, right = s.length() - 1;
+/* * Concrete Strategy 2: Two-Pointer (Memory Efficient)
+ */
+class TwoPointerStrategy implements PalindromeStrategy {
+    public boolean isValid(String input) {
+        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int left = 0, right = clean.length() - 1;
         while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) return false;
-            left++;
-            right--;
+            if (clean.charAt(left++) != clean.charAt(right--)) return false;
         }
         return true;
     }
@@ -37,27 +38,42 @@ class PalindromeService {
 
 /*
  * ==========================================
- * MAIN CLASS - PalindromeCheckerApp.java
+ * CONTEXT CLASS - PalindromeChecker.java
  * ==========================================
- * * Use Case 11: Encapsulation & OOP Structure
+ */
+class PalindromeChecker {
+    private PalindromeStrategy strategy;
+
+    // Inject the strategy at runtime
+    public void setStrategy(PalindromeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void check(String text) {
+        if (strategy == null) {
+            System.out.println("No strategy selected!");
+            return;
+        }
+        System.out.println("Using " + strategy.getClass().getSimpleName() + "...");
+        System.out.println("Result: " + strategy.isValid(text));
+    }
+}
+
+/*
+ * MAIN CLASS
  */
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 2.0.0\n---");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 3.0.0\n---");
 
-        // Create an instance of the service (Encapsulation)
-        PalindromeService service = new PalindromeService();
+        PalindromeChecker app = new PalindromeChecker();
+        String test = "Race Car";
 
-        String testPhrase = "Was it a car or a cat I saw?";
+        // Swap algorithms on the fly
+        app.setStrategy(new StackStrategy());
+        app.check(test);
 
-        // The main class doesn't care HOW it's checked, just that it IS checked.
-        if (service.isPalindrome(testPhrase)) {
-            System.out.println("Result: '" + testPhrase + "' is a Palindrome.");
-        } else {
-            System.out.println("Result: Not a palindrome.");
-        }
-
-        System.out.println("---\nProgram exiting...");
+        app.setStrategy(new TwoPointerStrategy());
+        app.check(test);
     }
 }

@@ -1,11 +1,11 @@
 # PalindromeCheckerApp
-Use Case 11: Encapsulation & Service-Oriented Architecture
-This stage refactors the procedural code into a proper Object-Oriented structure, focusing on clean code principles and maintainability.
+Use Case 12: Strategy Pattern & Runtime Polymorphism
+This stage implements the Strategy Design Pattern, allowing the application to switch between different palindrome-checking algorithms (Stack, Deque, Two-Pointer) dynamically.
 
 The application now:
 
-- Encapsulates Logic: All palindrome-related math and regex are hidden inside the PalindromeService class.
+- Defines an Interface: PalindromeStrategy acts as a blueprint, ensuring all algorithms follow the same isValid() contract.
 
-- Abstractions: The main method interacts only with the public interface of the service, unaware of whether it uses a Stack, Array, or Recursion under the hood.
+- Implements Concrete Strategies: Separate classes like StackStrategy and TwoPointerStrategy provide different technical implementations.
 
-- Separates Concerns: The PalindromeCheckerApp handles user interaction, while PalindromeService handles data processing.
+- Injects Dependency: The PalindromeChecker class uses Dependency Injection via a setter method to decide which algorithm to use at runtime.

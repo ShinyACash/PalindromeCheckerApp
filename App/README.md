@@ -1,11 +1,9 @@
 # PalindromeCheckerApp
-Use Case 7: Deque Front and Rear Validation
-This stage utilizes the Deque (Double-Ended Queue), a versatile structure that combines the best parts of Stacks and Queues for symmetrical data validation.
+Use Case 8: Java LinkedList & Bidirectional Iteration
+This stage utilizes the built-in java.util.LinkedList class. Because Java implements this as a Doubly Linked List, we can traverse it from both ends without manually reversing any pointers.
 
 The application now:
 
-- Populates: Adds every character to the Rear of the Deque.
+- Implements Collections: Uses the standard LinkedList<Character> to store the sequence.
 
-- Simultaneous Extraction: Pulls one character from the Front and one from the Rear in each iteration.
-
-- Efficient Termination: Continues only as long as size > 1. If the characters match until the Deque is empty or has only one "middle" character left, it’s a palindrome.
+- Dual Iterators: Employs ListIterator, which provides both next() and previous() methods.

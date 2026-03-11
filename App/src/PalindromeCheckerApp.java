@@ -1,65 +1,61 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*
  * ==========================================
  * MAIN CLASS - PalindromeCheckerApp.java
  * ==========================================
  *
- * Use Case 6: FIFO vs LIFO Comparison (Queue vs Stack)
+ * Use Case 7: Deque (Double-Ended Queue) Comparison
  *
  * Changes in this version:
- * - Introduced java.util.Queue and LinkedList implementation.
- * - Enqueued characters (FIFO) and Pushed characters (LIFO).
- * - Compared outputs of dequeue (poll) and pop directly.
- * - Validated palindrome logic through structural behavior.
+ * - Introduced java.util.Deque for front and rear access.
+ * - Utilized ArrayDeque for high-performance implementation.
+ * - Implemented simultaneous removal from both ends.
+ * - Optimized logic to handle middle character in odd-length strings.
  *
  * @author shiny
- * @version 1.5.0
+ * @version 1.6.0
  */
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         // UC1: Welcome Message
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.5.0");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.6.0");
         System.out.println("System Initialized successfully\n---");
 
-        String original = "radar";
+        String original = "deified";
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Stack for LIFO (Last In First Out)
-        Stack<Character> stack = new Stack<>();
-        // Queue (via LinkedList) for FIFO (First In First Out)
-        Queue<Character> queue = new LinkedList<>();
+        System.out.println("Analyzing String: " + original);
 
-        System.out.println("Input String: " + original);
-
-        // Load both structures
+        // Load characters into the Deque
         for (char c : original.toCharArray()) {
-            stack.push(c);  // LIFO
-            queue.add(c);   // FIFO
+            deque.addLast(c);
         }
 
         boolean isPalindrome = true;
 
         /*
-         * UC6 Logic:
-         * Pop (Last In) and Poll (First In) should match
-         * for every character in a palindrome.
+         * UC7 Logic:
+         * While there is more than one character, compare the front and back.
+         * If the deque has 1 or 0 chars left, the check is complete.
          */
-        while (!stack.isEmpty()) {
-            if (!stack.pop().equals(queue.poll())) {
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
         }
 
-
         if (isPalindrome) {
-            System.out.println("Result: Success! Structures match. It is a Palindrome.");
+            System.out.println("Result: Success! Deque front/rear matched. It is a Palindrome.");
         } else {
-            System.out.println("Result: Failed. Structures do not match.");
+            System.out.println("Result: Failed. Mismatch detected.");
         }
 
         System.out.println("---\nProgram exiting...");

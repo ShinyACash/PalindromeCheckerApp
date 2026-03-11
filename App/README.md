@@ -1,9 +1,11 @@
 # PalindromeCheckerApp
-Use Case 8: Java LinkedList & Bidirectional Iteration
-This stage utilizes the built-in java.util.LinkedList class. Because Java implements this as a Doubly Linked List, we can traverse it from both ends without manually reversing any pointers.
+Use Case 9: Recursive Slicing & Call Stack
+This stage moves away from iterative loops and utilizes Recursion, where the function calls itself to solve smaller versions of the same problem.
 
 The application now:
 
-- Implements Collections: Uses the standard LinkedList<Character> to store the sequence.
+- Evaluates Ends: Checks the character at index 0 and index length-1.
 
-- Dual Iterators: Employs ListIterator, which provides both next() and previous() methods.
+- Recursive Step: If the ends match, the function calls itself with a substring (removing the first and last characters).
+
+- Base Case: Terminates when the string length reaches 1 (middle character) or 0 (even-length symmetry).

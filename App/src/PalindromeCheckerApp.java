@@ -1,40 +1,31 @@
-import java.util.LinkedList;
-import java.util.ListIterator;
-
 /*
  * ==========================================
  * MAIN CLASS - PalindromeCheckerApp.java
  * ==========================================
  *
- * Use Case 8: Java Collections LinkedList & ListIterator
+ * Use Case 9: Recursive Palindrome Validation
  *
  * Changes in this version:
- * - Replaced custom Node logic with java.util.LinkedList.
- * - Used ListIterator for bidirectional traversal.
- * - Optimized comparison by moving from both ends toward the middle.
+ * - Implemented recursive method isPalindrome(String s).
+ * - Defined Base Cases to handle string lengths of 0 and 1.
+ * - Leveraged the JVM Call Stack for state management.
+ * - Optimized with substring slicing for each recursive step.
  *
  * @author shiny
- * @version 1.7.1
+ * @version 1.8.0
  */
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         // UC1: Welcome Message
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.7.1\n---");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.8.0\n---");
 
-        String original = "racecar";
-        LinkedList<Character> list = new LinkedList<>();
+        String original = "kayak";
+        System.out.println("Analyzing String: " + original);
 
-        // Load string into the LinkedList
-        for (char c : original.toCharArray()) {
-            list.add(c);
-        }
-
-        System.out.println("Analyzing LinkedList: " + list);
-
-        if (isPalindrome(list)) {
-            System.out.println("Result: Success! The LinkedList is a Palindrome.");
+        if (isPalindrome(original)) {
+            System.out.println("Result: Success! It is a Palindrome.");
         } else {
             System.out.println("Result: Failed. Not a Palindrome.");
         }
@@ -42,24 +33,22 @@ public class PalindromeCheckerApp {
         System.out.println("---\nProgram exiting...");
     }
 
-    public static boolean isPalindrome(LinkedList<Character> list) {
-        if (list.isEmpty()) return true;
-
-        // Using ListIterators to point at the start and the end
-        ListIterator<Character> forward = list.listIterator();
-        ListIterator<Character> backward = list.listIterator(list.size());
-
-        /*
-         * UC8 Logic:
-         * Move 'forward' from 0 and 'backward' from size.
-         * Stop when they meet in the middle.
-         */
-        while (forward.nextIndex() < backward.previousIndex()) {
-            if (!forward.next().equals(backward.previous())) {
-                return false; // Mismatch found
-            }
+    /**
+     * Recursive method to check palindrome status
+     */
+    public static boolean isPalindrome(String s) {
+        // Base Condition: If length is 0 or 1, it's a palindrome
+        if (s.length() <= 1) {
+            return true;
         }
 
-        return true;
+        // Check first and last characters
+        if (s.charAt(0) == s.charAt(s.length() - 1)) {
+            // Recursive Call: Check the substring excluding the ends
+            return isPalindrome(s.substring(1, s.length() - 1));
+        }
+
+        // If mismatch occurs, it's not a palindrome
+        return false;
     }
 }

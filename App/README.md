@@ -9,3 +9,4 @@ The application now:
 - Queues (FIFO): Enqueues characters to maintain the original sequence upon dequeuing.
 
 - Compares: Simultaneously removes elements from both. If the "First-In" (Queue) always matches the "Last-In" (Stack), the word is symmetrical.
+ 

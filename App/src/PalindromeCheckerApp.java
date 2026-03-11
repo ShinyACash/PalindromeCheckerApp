@@ -55,6 +55,7 @@ public class PalindromeCheckerApp {
             }
         }
 
+
         if (isPalindrome) {
             System.out.println("Result: Success! Structures match. It is a Palindrome.");
         } else {

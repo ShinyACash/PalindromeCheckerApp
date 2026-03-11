@@ -1,11 +1,11 @@
 # PalindromeCheckerApp
-Use Case 10: Normalization & Regex Pre-processing
-This stage focuses on Data Sanitization. In real-world scenarios, palindromes often include punctuation, spaces, and mixed casing (e.g., "Was it a car or a cat I saw?").
+Use Case 11: Encapsulation & Service-Oriented Architecture
+This stage refactors the procedural code into a proper Object-Oriented structure, focusing on clean code principles and maintainability.
 
 The application now:
 
-- Normalizes Case: Converts the entire string to lowercase using .toLowerCase().
+- Encapsulates Logic: All palindrome-related math and regex are hidden inside the PalindromeService class.
 
-- Cleans Data: Uses the replaceAll() method with a Regular Expression ([^a-zA-Z0-9]) to strip away spaces, commas, colons, and other non-alphanumeric symbols.
+- Abstractions: The main method interacts only with the public interface of the service, unaware of whether it uses a Stack, Array, or Recursion under the hood.
 
-- Validates Phrases: The core logic now operates on a "clean" version of the input, allowing for sentence-level palindrome detection.
+- Separates Concerns: The PalindromeCheckerApp handles user interaction, while PalindromeService handles data processing.

@@ -1,67 +1,65 @@
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ListIterator;
 
 /*
  * ==========================================
  * MAIN CLASS - PalindromeCheckerApp.java
  * ==========================================
  *
- * Use Case 6: FIFO vs LIFO Comparison (Queue vs Stack)
+ * Use Case 8: Java Collections LinkedList & ListIterator
  *
  * Changes in this version:
- * - Introduced java.util.Queue and LinkedList implementation.
- * - Enqueued characters (FIFO) and Pushed characters (LIFO).
- * - Compared outputs of dequeue (poll) and pop directly.
- * - Validated palindrome logic through structural behavior.
+ * - Replaced custom Node logic with java.util.LinkedList.
+ * - Used ListIterator for bidirectional traversal.
+ * - Optimized comparison by moving from both ends toward the middle.
  *
  * @author shiny
- * @version 1.5.0
+ * @version 1.7.1
  */
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         // UC1: Welcome Message
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.5.0");
-        System.out.println("System Initialized successfully\n---");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.7.1\n---");
 
-        String original = "radar";
+        String original = "racecar";
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Stack for LIFO (Last In First Out)
-        Stack<Character> stack = new Stack<>();
-        // Queue (via LinkedList) for FIFO (First In First Out)
-        Queue<Character> queue = new LinkedList<>();
-
-        System.out.println("Input String: " + original);
-
-        // Load both structures
+        // Load string into the LinkedList
         for (char c : original.toCharArray()) {
-            stack.push(c);  // LIFO
-            queue.add(c);   // FIFO
+            list.add(c);
         }
 
-        boolean isPalindrome = true;
+        System.out.println("Analyzing LinkedList: " + list);
 
-        /*
-         * UC6 Logic:
-         * Pop (Last In) and Poll (First In) should match
-         * for every character in a palindrome.
-         */
-        while (!stack.isEmpty()) {
-            if (!stack.pop().equals(queue.poll())) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-
-        if (isPalindrome) {
-            System.out.println("Result: Success! Structures match. It is a Palindrome.");
+        if (isPalindrome(list)) {
+            System.out.println("Result: Success! The LinkedList is a Palindrome.");
         } else {
-            System.out.println("Result: Failed. Structures do not match.");
+            System.out.println("Result: Failed. Not a Palindrome.");
         }
 
         System.out.println("---\nProgram exiting...");
+    }
+
+    public static boolean isPalindrome(LinkedList<Character> list) {
+        if (list.isEmpty()) return true;
+
+        // Using ListIterators to point at the start and the end
+        ListIterator<Character> forward = list.listIterator();
+        ListIterator<Character> backward = list.listIterator(list.size());
+
+        /*
+         * UC8 Logic:
+         * Move 'forward' from 0 and 'backward' from size.
+         * Stop when they meet in the middle.
+         */
+        while (forward.nextIndex() < backward.previousIndex()) {
+            if (!forward.next().equals(backward.previous())) {
+                return false; // Mismatch found
+            }
+        }
+
+        return true;
     }
 }

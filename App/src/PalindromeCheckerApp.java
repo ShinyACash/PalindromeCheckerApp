@@ -3,52 +3,49 @@
  * MAIN CLASS - PalindromeCheckerApp.java
  * ==========================================
  *
- * Use Case 9: Recursive Palindrome Validation
+ * Use Case 10: Pre-processing & Regular Expressions
  *
  * Changes in this version:
- * - Implemented recursive method isPalindrome(String s).
- * - Defined Base Cases to handle string lengths of 0 and 1.
- * - Leveraged the JVM Call Stack for state management.
- * - Optimized with substring slicing for each recursive step.
+ * - Implemented string normalization (lowercase conversion).
+ * - Used Regex to remove spaces and non-alphanumeric characters.
+ * - Integrated UC4's optimized Two-Pointer logic for the check.
+ * - Handles complex phrases and sentences.
  *
  * @author shiny
- * @version 1.8.0
+ * @version 1.9.0
  */
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         // UC1: Welcome Message
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.8.0\n---");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.9.0\n---");
 
-        String original = "kayak";
-        System.out.println("Analyzing String: " + original);
+        String input = "A man, a plan, a canal: Panama";
+        System.out.println("Original Input: " + input);
 
-        if (isPalindrome(original)) {
-            System.out.println("Result: Success! It is a Palindrome.");
+        // UC10: Normalization
+        // [^a-zA-Z0-9] means "anything that is NOT a letter or a digit"
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        System.out.println("Normalized Input: " + normalized);
+
+        if (isPalindrome(normalized)) {
+            System.out.println("Result: Success! It is a phrase palindrome.");
         } else {
-            System.out.println("Result: Failed. Not a Palindrome.");
+            System.out.println("Result: Failed. Not a palindrome.");
         }
 
         System.out.println("---\nProgram exiting...");
     }
 
-    /**
-     * Recursive method to check palindrome status
-     */
+    // Using UC4's Two-Pointer logic because it's the cleanest for normalized strings
     public static boolean isPalindrome(String s) {
-        // Base Condition: If length is 0 or 1, it's a palindrome
-        if (s.length() <= 1) {
-            return true;
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) return false;
+            left++;
+            right--;
         }
-
-        // Check first and last characters
-        if (s.charAt(0) == s.charAt(s.length() - 1)) {
-            // Recursive Call: Check the substring excluding the ends
-            return isPalindrome(s.substring(1, s.length() - 1));
-        }
-
-        // If mismatch occurs, it's not a palindrome
-        return false;
+        return true;
     }
 }

@@ -1,11 +1,11 @@
 # PalindromeCheckerApp
-Use Case 9: Recursive Slicing & Call Stack
-This stage moves away from iterative loops and utilizes Recursion, where the function calls itself to solve smaller versions of the same problem.
+Use Case 10: Normalization & Regex Pre-processing
+This stage focuses on Data Sanitization. In real-world scenarios, palindromes often include punctuation, spaces, and mixed casing (e.g., "Was it a car or a cat I saw?").
 
 The application now:
 
-- Evaluates Ends: Checks the character at index 0 and index length-1.
+- Normalizes Case: Converts the entire string to lowercase using .toLowerCase().
 
-- Recursive Step: If the ends match, the function calls itself with a substring (removing the first and last characters).
+- Cleans Data: Uses the replaceAll() method with a Regular Expression ([^a-zA-Z0-9]) to strip away spaces, commas, colons, and other non-alphanumeric symbols.
 
-- Base Case: Terminates when the string length reaches 1 (middle character) or 0 (even-length symmetry).
+- Validates Phrases: The core logic now operates on a "clean" version of the input, allowing for sentence-level palindrome detection.

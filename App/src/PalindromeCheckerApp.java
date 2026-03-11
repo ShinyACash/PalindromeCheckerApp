@@ -1,63 +1,57 @@
 /*
  * ==========================================
- *   MAIN CLASS - PalindromeCheckerApp.java
+ * MAIN CLASS - PalindromeCheckerApp.java
  * ==========================================
  *
- * Use Case 1: Application Entry & Welcome Message
+ * Use Case 4: Character Array & Two-Pointer Approach
  *
- * At this stage, the application:
- *  - Starts execution from the main() method
- *  - Displays a welcome message
- *  - Shows application version
- *
- * No palindrome logic is implemented yet.
- *
- * The goal is to establish a clear startup flow.
+ * Changes in this version:
+ * - Converted String to char[] for direct index access.
+ * - Implemented Two-Pointer logic (Left and Right).
+ * - Eliminated the need for a "reversed" String object.
+ * - Optimized performance (O(n/2) comparisons).
  *
  * @author shiny
- * @version 1.0.0
+ * @version 1.3.0
  */
 
-public class PalindromeCheckerApp{
+public class PalindromeCheckerApp {
 
-    /*
-     * Application entry point
-     *
-     * This is the first method executed by the JVM
-     * when the program starts
-     *
-     * @params args Command-line arguments
-     *
-     */
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // UC1: Welcome Message
-        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.1.0");
+        System.out.println("Welcome to Palindrome Checker App.\nVersion : 1.3.0");
         System.out.println("System Initialized successfully\n---");
 
-        // UC3: Manual Logic
-        String original = "racecar"; // Hardcoded for now
-        String reversed = "";
+        // UC4: Two-Pointer Logic
+        String original = "racecar";
+        char[] charArray = original.toCharArray(); // Convert to char array
 
-        System.out.println("Target String: " + original);
+        boolean isPalindrome = true;
+        int left = 0;
+        int right = charArray.length - 1;
+
+        System.out.println("Analyzing: " + original);
 
         /*
-         * Loop Logic:
-         * Start from the last index (length - 1) and move to 0.
-         * We concatenate each character to our 'reversed' string.
+         * Two-Pointer Technique:
+         * We compare the character at 'left' with the character at 'right'.
+         * If they match, we move both pointers toward the center.
          */
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed += original.charAt(i);
+        while (left < right) {
+            if (charArray[left] != charArray[right]) {
+                isPalindrome = false;
+                break; // Exit early if a mismatch is found
+            }
+            left++;
+            right--;
         }
 
-        System.out.println("Reversed String: " + reversed);
-
-        // UC3: content-based comparison using .equals()
-        if (original.equals(reversed)) {
+        if (isPalindrome) {
             System.out.println("Result: Success! It is a Palindrome.");
         } else {
             System.out.println("Result: Failed. Not a Palindrome.");
         }
+
+        System.out.println("---\nProgram exiting...");
     }
 }
-

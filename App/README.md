@@ -4,8 +4,8 @@ At this stage, the application moves beyond a simple startup and implements its 
 
 The application now:
 
-- Iterates: Uses a for loop to traverse the string from the last index to the first.
+- Converts Data: Transforms the String into a char[] (primitive character array).
 
-- Concatenates: Builds the reversed result using the + operator.
+- Two-Pointer Logic: Uses two integer variables (left and right) to track positions from both ends of the array simultaneously.
 
-- Compares Content: Uses .equals() instead of == to ensure the actual character sequences are compared, not just memory addresses.
+- Early Exit: The loop terminates immediately if a mismatch is detected, saving CPU cycles.

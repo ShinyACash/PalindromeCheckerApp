@@ -1,11 +1,11 @@
 # PalindromeCheckerApp
-Use Case 12: Strategy Pattern & Runtime Polymorphism
-This stage implements the Strategy Design Pattern, allowing the application to switch between different palindrome-checking algorithms (Stack, Deque, Two-Pointer) dynamically.
+Use Case 13: Accurate Performance Profiling
+This version implements a high-precision benchmarking utility to compare the efficiency of different data structures under load.
 
 The application now:
 
-- Defines an Interface: PalindromeStrategy acts as a blueprint, ensuring all algorithms follow the same isValid() contract.
+- Isolates Logic: Ensures that console output (I/O) is excluded from timing to prevent skewed data.
 
-- Implements Concrete Strategies: Separate classes like StackStrategy and TwoPointerStrategy provide different technical implementations.
+- Warmup Execution: Accounts for Just-In-Time (JIT) compilation by running the method once before recording the time.
 
-- Injects Dependency: The PalindromeChecker class uses Dependency Injection via a setter method to decide which algorithm to use at runtime.
+- Precision Metrics: Uses System.nanoTime() for sub-millisecond accuracy.
